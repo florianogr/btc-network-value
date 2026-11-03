@@ -1,0 +1,41 @@
+[project]
+name = "btc-network-value"
+version = "0.1.0"
+description = "Seminararbeit: Netzwerkwert-Modelle für Bitcoin (NVT, Metcalfe, Stock-to-Flow, VECM)"
+readme = "README.md"
+authors = [
+    { name = "florianogr", email = "florian.ogrzewalla@uni-ulm.de" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "arch>=8.0.0",
+    "coinmetrics-api-client>=2026.10.23.19",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+    "pandas>=2.3.3",
+    "pyarrow>=26.0.1",
+    "python-dotenv>=1.2.4",
+    "requests>=2.34.2",
+    "statsmodels>=0.15.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "nvm"
+
+[dependency-groups]
+dev = [
+    "jupyter>=1.1.1",
+    "nbstripout>=0.9.1",
+    "ruff>=0.17.3",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

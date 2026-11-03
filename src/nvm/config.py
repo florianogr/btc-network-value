@@ -1,0 +1,56 @@
+"""Zentrale Konstanten. Zeiträume, Stichtage und Pfade werden NUR hier geändert.
+
+Wer einen Wert ändert, macht das per Pull Request, damit alle drei Teile
+mit demselben Stand rechnen.
+"""
+
+from pathlib import Path
+
+import pandas as pd
+
+# --- Pfade -----------------------------------------------------------------
+ROOT = Path(__file__).resolve().parents[2]
+DATA_DIR = ROOT / "data"
+RAW_DIR = DATA_DIR / "raw"
+PROCESSED_DIR = DATA_DIR / "processed"
+FIGURES_DIR = ROOT / "output" / "figures"
+TABLES_DIR = ROOT / "output" / "tables"
+
+# --- Datenstand --------------------------------------------------------------
+# Eingefrorener Download. Ordner data/raw/<SNAPSHOT_DATE>/ wird nie bearbeitet.
+SNAPSHOT_DATE = "2026-11-15"
+SNAPSHOT_DIR = RAW_DIR / SNAPSHOT_DATE
+
+PANEL_DAILY = PROCESSED_DIR / "panel_daily.parquet"
+PANEL_MONTHLY = PROCESSED_DIR / "panel_monthly.parquet"
+
+# --- Stichprobe -------------------------------------------------------------
+# TODO: gemeinsam festlegen und dann nicht mehr ändern.
+SAMPLE_START = pd.Timestamp("2011-01-01")
+SAMPLE_END = pd.Timestamp("2026-10-31")
+OOS_START = pd.Timestamp("2020-01-01")  # Beginn der Out-of-sample-Phase
+
+# --- Ereignisse -------------------------------------------------------------
+HALVINGS = [
+    pd.Timestamp("2012-11-28"),
+    pd.Timestamp("2016-07-09"),
+    pd.Timestamp("2020-05-11"),
+    pd.Timestamp("2024-04-20"),
+]
+ETF_START = pd.Timestamp("2024-01-11")  # Handelsstart der US-Spot-ETFs
+
+# --- Datenquellen -----------------------------------------------------------
+ASSET = "btc"
+# Welche Metrik woher kommt, steht in SOURCES.md.
+# Coin Metrics Community API (frei). CapRealUSD und TxTfrValAdjUSD sind dort nicht frei:
+# Realized Cap = CapMrktCurUSD / CapMVRVCur, Transaktionsvolumen kommt von blockchain.com.
+COINMETRICS_METRICS = [
+    "PriceUSD",  # Preis
+    "CapMrktCurUSD",  # Marktkapitalisierung
+    "CapMVRVCur",  # MVRV, daraus Realized Cap
+    "AdrActCnt",  # aktive Adressen (für Metcalfe)
+    "SplyCur",  # umlaufende Menge (für Stock-to-Flow)
+    "TxCnt",  # Anzahl Transaktionen
+]
+# blockchain.com Charts API (frei): geschätztes On-chain-Transaktionsvolumen in USD (für NVT)
+BLOCKCHAIN_COM_CHARTS = ["estimated-transaction-volume-usd"]

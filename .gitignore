@@ -1,0 +1,24 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.ruff_cache/
+
+# Virtual environments
+.venv/
+
+# Secrets (API-Keys) – NIE committen
+.env
+
+# Aufbereitete Daten werden von scripts/02_build_panel.py erzeugt
+data/processed/*
+!data/processed/.gitkeep
+
+# Notebooks: Checkpoints
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
