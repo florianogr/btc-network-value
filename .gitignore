@@ -13,6 +13,9 @@ wheels/
 # Secrets (API-Keys) – NIE committen
 .env
 
+# Lokale Test-Downloads, nicht geteilt
+data/local/
+
 # Aufbereitete Daten werden von scripts/02_build_panel.py erzeugt
 data/processed/*
 !data/processed/.gitkeep

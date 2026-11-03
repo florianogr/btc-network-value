@@ -1,0 +1,98 @@
+QUELLEN – btc-network-value
+===========================
+
+Abgerufen am: 03.11.2026 (Test-Download in data/local/2026-11-03/)
+Abrufskript:  scripts/01_download.py
+Details zu Dateien und Einschränkungen: SOURCES.md
+
+
+1. DATENQUELLEN (verwendet)
+---------------------------
+
+[1] Coin Metrics – Community Network Data (API v4)
+    Anbieter:    Coin Metrics Inc.
+    Website:     https://coinmetrics.io/community-network-data/
+    Doku:        https://docs.coinmetrics.io/api/v4/
+    Endpunkt:    https://community-api.coinmetrics.io/v4/timeseries/asset-metrics
+                 (über Python-Paket coinmetrics-api-client, Asset "btc", Frequenz 1d)
+    Metriken:    PriceUSD        Preis in USD
+                 CapMrktCurUSD   Marktkapitalisierung in USD
+                 CapMVRVCur      MVRV-Verhältnis (daraus Realized Cap)
+                 AdrActCnt       aktive Adressen
+                 SplyCur         umlaufende Menge in BTC
+                 TxCnt           Anzahl Transaktionen
+                 IssTotNtv       neu geschürfte BTC pro Tag
+                 HashRate        Hashrate
+    Datei:       coinmetrics_btc_daily.csv
+    Zeitraum:    03.01.2009 – 02.11.2026 (Preis ab 18.07.2010)
+    Lizenz:      Creative Commons BY-NC 4.0 (Nennung von Coin Metrics erforderlich)
+
+[2] blockchain.com – Charts API
+    Anbieter:    Blockchain.com
+    Website:     https://www.blockchain.com/explorer/charts/estimated-transaction-volume-usd
+    Endpunkt:    https://api.blockchain.info/charts/estimated-transaction-volume-usd
+                 ?timespan=all&format=json&sampled=false
+    Inhalt:      geschätztes On-chain-Transaktionsvolumen in USD (täglich)
+    Datei:       blockchain_com_estimated-transaction-volume-usd.csv
+    Zeitraum:    28.08.2010 – 28.10.2026
+
+[3] FRED – Federal Reserve Economic Data
+    Anbieter:    Federal Reserve Bank of St. Louis
+    Website:     https://fred.stlouisfed.org/
+    Endpunkt:    https://fred.stlouisfed.org/graph/fredgraph.csv?id=<SERIES_ID>
+    Reihen:      SP500      S&P 500                                https://fred.stlouisfed.org/series/SP500
+                 NASDAQCOM  NASDAQ Composite Index                 https://fred.stlouisfed.org/series/NASDAQCOM
+                 VIXCLS     CBOE Volatility Index (VIX)            https://fred.stlouisfed.org/series/VIXCLS
+                 DGS10      10-Year Treasury Constant Maturity     https://fred.stlouisfed.org/series/DGS10
+                 DFF        Federal Funds Effective Rate           https://fred.stlouisfed.org/series/DFF
+                 DTWEXBGS   Nominal Broad U.S. Dollar Index        https://fred.stlouisfed.org/series/DTWEXBGS
+    Dateien:     fred_<SERIES_ID>.csv
+    Hinweis:     SP500 enthält bei FRED nur die letzten 10 Jahre (ab 04.11.2016).
+                 Die Originalquellen der Reihen (S&P Dow Jones Indices, Nasdaq, CBOE,
+                 Board of Governors of the Federal Reserve System) sind auf der
+                 jeweiligen FRED-Seite genannt und sollten mit zitiert werden.
+
+[4] Yahoo Finance
+    Anbieter:    Yahoo
+    Website:     https://finance.yahoo.com/
+    Endpunkt:    https://query2.finance.yahoo.com/v8/finance/chart/<SYMBOL>
+                 (inoffizielle Schnittstelle, ohne Gewähr)
+    Symbole:     GC=F    Gold-Future (COMEX), USD je Feinunze   https://finance.yahoo.com/quote/GC=F
+                 ^GSPC   S&P 500, volle Historie                https://finance.yahoo.com/quote/%5EGSPC
+    Dateien:     yahoo_gold_futures.csv (ab 30.08.2000), yahoo_sp500.csv (ab 02.01.1970)
+
+[5] Farside Investors – Bitcoin ETF Flow
+    Anbieter:    Farside Investors (FS Investors Limited), London
+    Website:     https://farside.co.uk/bitcoin-etf-flow-all-data/
+    Inhalt:      tägliche Netto-Zuflüsse je US-Spot-Bitcoin-ETF in Mio. USD
+                 (IBIT, FBTC, BITB, ARKB, BTCO, EZBC, BRRR, HODL, BTCW, MSBT, GBTC, BTC, Total)
+    Datei:       farside_btc_etf_flows.csv
+    Zeitraum:    11.01.2024 – 03.11.2026
+    Hinweis:     aus der HTML-Tabelle der Website gelesen, keine offizielle API.
+
+
+2. EREIGNISDATEN (in src/nvm/config.py)
+---------------------------------------
+
+Bitcoin-Halvings (Blockhöhen 210.000 / 420.000 / 630.000 / 840.000):
+    28.11.2012, 09.07.2016, 11.05.2020, 20.04.2024
+    nachprüfbar z. B. über einen Block-Explorer: https://www.blockchain.com/explorer
+
+Start der US-Spot-Bitcoin-ETFs:
+    11.01.2024 (erster Handelstag nach der Genehmigung durch die SEC am 10.01.2024)
+    https://www.sec.gov/
+
+
+3. GETESTET, ABER NICHT VERWENDET
+---------------------------------
+
+SoSoValue (https://sosovalue.com/)  – blockt automatische Abrufe
+Stooq (https://stooq.com/)          – Download verlangt JavaScript
+Coin Metrics: CapRealUSD, TxTfrValAdjUSD – nicht in der kostenlosen Community API
+
+
+4. SOFTWARE
+-----------
+
+Python 3.12, pandas, NumPy, statsmodels, arch, matplotlib, PyArrow, requests,
+coinmetrics-api-client, lxml. Genaue Versionen: uv.lock
