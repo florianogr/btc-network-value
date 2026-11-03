@@ -7,7 +7,7 @@ Seminararbeit: Netzwerkwert-Modelle für Bitcoin (NVT, Metcalfe, Stock-to-Flow, 
 Voraussetzung: [uv](https://docs.astral.sh/uv/getting-started/installation/) und Git.
 
 ```bash
-git clone https://github.com/<owner>/btc-network-value.git
+git clone https://github.com/florianogr/btc-network-value.git
 cd btc-network-value
 uv sync                          # identische Umgebung aus uv.lock
 uv run nbstripout --install      # Notebook-Ausgaben vor jedem Commit löschen
