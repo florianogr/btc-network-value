@@ -3,7 +3,7 @@
 Jede Datei in `data/raw/` steht hier mit Quelle, Abrufdatum und Skript, das sie erzeugt hat.
 Rohdaten werden nach dem Download nie bearbeitet. Alle Dateien erzeugt `scripts/01_download.py`.
 
-Datenstand: `data/raw/2026-11-15/` · abgerufen am _offen_ · von _offen_
+Datenstand: `data/raw/2026-11-03/` · abgerufen am 03.11.2026 · von Florian
 
 | Datei | Quelle | Inhalt | Verfügbar ab |
 |---|---|---|---|

@@ -20,7 +20,7 @@ cp .env.example .env             # API-Keys eintragen, .env nie committen
 uv run python scripts/run_all.py
 ```
 
-Erzeugt aus dem eingefrorenen Datenstand in `data/raw/2026-11-15/` das Panel in
+Erzeugt aus dem eingefrorenen Datenstand in `data/raw/2026-11-03/` das Panel in
 `data/processed/` sowie alle Abbildungen (`output/figures/*.pdf`) und Tabellen
 (`output/tables/*.tex`). `scripts/01_download.py` läuft nur einmal beim Einfrieren
 des Datenstands und ist nicht Teil von `run_all.py`.

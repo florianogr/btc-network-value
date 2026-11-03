@@ -1,7 +1,7 @@
 """Lädt alle Rohdaten in data/raw/<SNAPSHOT_DATE>/ (eingefrorener Datenstand).
 
     uv run python scripts/01_download.py                         # Datenstand einfrieren
-    uv run python scripts/01_download.py data/local/2026-11-03   # nur lokal ausprobieren
+    uv run python scripts/01_download.py data/local/test         # nur lokal ausprobieren
 
 Läuft nicht in run_all.py. Bestehende Dateien werden nie überschrieben.
 Nach dem Einfrieren SOURCES.md ergänzen.

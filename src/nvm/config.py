@@ -18,7 +18,7 @@ TABLES_DIR = ROOT / "output" / "tables"
 
 # --- Datenstand --------------------------------------------------------------
 # Eingefrorener Download. Ordner data/raw/<SNAPSHOT_DATE>/ wird nie bearbeitet.
-SNAPSHOT_DATE = "2026-11-15"
+SNAPSHOT_DATE = "2026-11-03"
 SNAPSHOT_DIR = RAW_DIR / SNAPSHOT_DATE
 
 PANEL_DAILY = PROCESSED_DIR / "panel_daily.parquet"

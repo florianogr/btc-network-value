@@ -1,7 +1,7 @@
 QUELLEN – btc-network-value
 ===========================
 
-Abgerufen am: 03.11.2026 (Test-Download in data/local/2026-11-03/)
+Abgerufen am: 03.11.2026 (Datenstand data/raw/2026-11-03/)
 Abrufskript:  scripts/01_download.py
 Details zu Dateien und Einschränkungen: SOURCES.md
 
