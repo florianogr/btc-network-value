@@ -4,9 +4,17 @@ import numpy as np
 import pandas as pd
 
 
-def nvt(market_cap: pd.Series, tx_volume: pd.Series, window: int = 90) -> pd.Series:
-    """NVT-Signal: Marktkapitalisierung / gleitender Mittelwert des Transaktionsvolumens."""
-    return market_cap / tx_volume.rolling(window).mean()
+def nvt(
+    market_cap: pd.Series, tx_volume: pd.Series, window: int = 90, min_days: int | None = None
+) -> pd.Series:
+    """NVT-Signal: Marktkapitalisierung / gleitender Mittelwert des Transaktionsvolumens.
+
+    Erwartet einen lückenlosen Tagesindex (fehlende Tage als NaN), weil das Fenster Zeilen zählt.
+    Der Mittelwert wird über die vorhandenen Tage gebildet, wenn mindestens `min_days` da sind.
+    """
+    if not tx_volume.index.to_series().diff().dropna().eq(pd.Timedelta("1D")).all():
+        raise ValueError("tx_volume braucht einen lückenlosen Tagesindex")
+    return market_cap / tx_volume.rolling(window, min_periods=min_days or window).mean()
 
 
 def stock_to_flow(supply: pd.Series, days: int = 365) -> pd.Series:

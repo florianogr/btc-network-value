@@ -43,6 +43,12 @@ output/                  figures/ und tables/ für Overleaf
 ## Regeln
 
 - **Ein Datenstand.** Analysen lesen nur aus `data/processed/` über `nvm.data.load_panel()`.
+  Das Panel ist der Master-Datensatz (01.01.2012 – 30.06.2026, ohne fehlende Werte):
+
+  ```python
+  from nvm import data
+  panel = data.load_panel("monthly")   # 174 Monate; "daily" für 5.295 Tage
+  ```
 - **Konstanten nur in `src/nvm/config.py`.** Stichprobe, OOS-Start, Halvings, ETF-Start.
 - **Notebooks zum Ausprobieren, Skripte für Ergebnisse.** Was in die Arbeit kommt, erzeugt `run_all.py`.
 - **Branches und Pull Requests.** Eigener Branch je Person (`a/nvt`, `b/vecm`, `c/s2f`),

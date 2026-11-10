@@ -25,10 +25,20 @@ PANEL_DAILY = PROCESSED_DIR / "panel_daily.parquet"
 PANEL_MONTHLY = PROCESSED_DIR / "panel_monthly.parquet"
 
 # --- Stichprobe -------------------------------------------------------------
-# TODO: gemeinsam festlegen und dann nicht mehr ändern.
-SAMPLE_START = pd.Timestamp("2011-01-01")
-SAMPLE_END = pd.Timestamp("2026-10-31")
+# Gemeinsam festgelegt am 10.11.2026. Nicht mehr ändern.
+# Daten vor SAMPLE_START dienen nur als Vorlauf für gleitende Kennzahlen (NVT, S2F),
+# sie fließen nicht in die Analyse ein.
+SAMPLE_START = pd.Timestamp("2012-01-01")
+SAMPLE_END = pd.Timestamp("2026-06-30")
 OOS_START = pd.Timestamp("2020-01-01")  # Beginn der Out-of-sample-Phase
+
+# --- Kennzahlen ---------------------------------------------------------------
+# NVT Signal (Kalichkin 2018): Market Cap / gleitender Mittelwert des Transaktionsvolumens.
+# Fehlen einzelne Tage, wird über die vorhandenen gemittelt, solange genug Tage da sind.
+NVT_WINDOW = 90  # Hauptvariante
+NVT_MIN_DAYS = 80
+NVT_WINDOW_ROBUST = 365  # Robustheit: Jahresvolumen, analog zum Jahresgewinn im KGV
+NVT_MIN_DAYS_ROBUST = 330
 
 # --- Ereignisse -------------------------------------------------------------
 HALVINGS = [

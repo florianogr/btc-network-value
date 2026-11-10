@@ -49,6 +49,18 @@ def load_raw(name: str) -> pd.DataFrame:
 
 
 def load_panel(freq: str = "daily") -> pd.DataFrame:
-    """Liest das aufbereitete Panel. Alle Analysen lesen nur hierüber."""
-    path = {"daily": config.PANEL_DAILY, "monthly": config.PANEL_MONTHLY}[freq]
-    return pd.read_parquet(path)
+    """Liest den Master-Datensatz (Panel 2012-01-01 bis 2026-06-30).
+
+    Alle Analysen lesen nur hierüber:
+
+    from nvm import data
+    panel = data.load_panel("monthly")   # oder "daily"
+    """
+    paths = {"daily": config.PANEL_DAILY, "monthly": config.PANEL_MONTHLY}
+    if freq not in paths:
+        raise ValueError(f"freq muss 'daily' oder 'monthly' sein, nicht {freq!r}")
+    if not paths[freq].exists():
+        raise FileNotFoundError(
+            f"{paths[freq]} fehlt. Erst bauen: uv run python scripts/02_build_panel.py"
+        )
+    return pd.read_parquet(paths[freq])
