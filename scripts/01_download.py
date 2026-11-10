@@ -42,11 +42,6 @@ def main() -> None:
     jobs = {"coinmetrics_btc_daily": data.download_coinmetrics}
     for chart in config.BLOCKCHAIN_COM_CHARTS:
         jobs[f"blockchain_com_{chart}"] = lambda c=chart: data.download_blockchain_com(c)
-    for series_id in config.FRED_SERIES:
-        jobs[f"fred_{series_id}"] = lambda s=series_id: data.download_fred(s)
-    for symbol, name in config.YAHOO_SYMBOLS.items():
-        jobs[f"yahoo_{name}"] = lambda s=symbol: data.download_yahoo(s)
-    jobs["farside_btc_etf_flows"] = data.download_farside_btc_etf_flows
 
     ok = [save(target_dir, name, fetch) for name, fetch in jobs.items()]
     print(f"\n{sum(ok)}/{len(ok)} Quellen -> {target_dir}")

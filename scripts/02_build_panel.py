@@ -7,6 +7,8 @@ from nvm import config, data, metrics
 
 def main() -> None:
     raw = data.load_raw("coinmetrics_btc_daily").apply(pd.to_numeric, errors="coerce")
+    # Metadaten-Spalten des API-Clients, in der Community-Version immer leer
+    raw = raw.drop(columns=["SplyCur-status", "SplyCur-status-time"])
     tx_volume = data.load_raw("blockchain_com_estimated-transaction-volume-usd").iloc[:, 0]
 
     panel = raw.join(tx_volume.rename("TxVolUSD"), how="left")

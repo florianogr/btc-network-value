@@ -59,19 +59,3 @@ DOWNLOAD_START = pd.Timestamp("2009-01-03")
 
 # blockchain.com Charts API (frei): geschätztes On-chain-Transaktionsvolumen in USD (für NVT)
 BLOCKCHAIN_COM_CHARTS = ["estimated-transaction-volume-usd"]
-
-# FRED (St. Louis Fed, frei): Kontrollvariablen
-FRED_SERIES = {
-    "SP500": "S&P 500 (nur die letzten 10 Jahre)",
-    "NASDAQCOM": "NASDAQ Composite",
-    "VIXCLS": "VIX",
-    "DGS10": "Rendite 10-jährige US-Staatsanleihen",
-    "DFF": "Federal Funds Rate",
-    "DTWEXBGS": "Handelsgewichteter US-Dollar-Index (Broad)",
-}
-
-# Yahoo Finance (frei, inoffizielle API): Preise mit voller Historie
-YAHOO_SYMBOLS = {
-    "GC=F": "gold_futures",  # Gold-Future COMEX, USD je Feinunze
-    "^GSPC": "sp500",  # S&P 500, volle Historie
-}
